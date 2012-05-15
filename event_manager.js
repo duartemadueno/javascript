@@ -25,13 +25,13 @@ var event_manager = (function(){
 })();
 
 //USAGE
-function callback1(message){ alert(message + "1"); }
-function callback2(message){ alert(message + "2"); }
+function callback1(message){ console.log(message + "1"); }
+function callback2(message){ console.log(message + "2"); }
 event_manager.on("message", callback1);
 event_manager.on("message", callback2);
 event_manager.emit("message", "test");
-// alerts "test1"
-// alerts "test2"
+// returns "test1"
+// returns "test2"
 event_manager.removeListener("message", callback1);
 event_manager.emit("message", "second test");
-// alerts "second test2"
+// returns "second test2"
