@@ -1,27 +1,27 @@
 var event_manager = (function(){
   var self = {};
-    self.callbacks = {};
-    self.emit = function(event_name, data) {
-        if (!self.callbacks[event_name])
-            return;
-        for (var i in self.callbacks[event_name]) {
-            self.callbacks[event_name][i](data)
-        }
-    };
-    self.on = function(event_name, callback) {
-        if ('function' != typeof (callback))
-            return;
-        if (!self.callbacks[event_name]) 
-            self.callbacks[event_name] = [];
-        self.callbacks[event_name].push(callback)
-    };
-    self.removeListener = function(event_name, callback) {
-        for (var i in self.callbacks[event_name]) {
-            if (self.callbacks[event_name][i] == callback)
-                self.callbacks[event_name].splice(i, 1)
-        }
-    };
-    return self;
+  self.callbacks = {};
+  self.emit = function(event_name, data) {
+    if (!self.callbacks[event_name])
+  	  return;
+  	for (var i=0; i < self.callbacks[event_name].length;i++) {
+  	  self.callbacks[event_name][i](data)
+  	}
+  };
+  self.on = function(event_name, callback) {
+  	if ('function' != typeof (callback))
+  	  return;
+  	if (!self.callbacks[event_name]) 
+  	  self.callbacks[event_name] = [];
+  	self.callbacks[event_name].push(callback)
+  };
+  self.removeListener = function(event_name, callback) {
+  	for (var i=0; i < self.callbacks[event_name].length;i++) {
+  	  if (self.callbacks[event_name][i] == callback)
+  		self.callbacks[event_name].splice(i, 1)
+  	}
+  };
+  return self;
 })();
 
 //USAGE
