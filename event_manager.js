@@ -1,4 +1,4 @@
-var event_manager = (function(){
+var event_emitter = (function(){
   var self = {};
   self.callbacks = {};
   self.emit = function(event_name, data) {
@@ -16,10 +16,12 @@ var event_manager = (function(){
   	self.callbacks[event_name].push(callback)
   };
   self.removeListener = function(event_name, callback) {
-  	for (var i=0; i < self.callbacks[event_name].length;i++) {
-  	  if (self.callbacks[event_name][i] == callback)
-  		self.callbacks[event_name].splice(i, 1)
-  	}
+    if (self.callbacks && self.callbacks[event_name]) {
+    	for (var i=0; i < self.callbacks[event_name].length;i++) {
+    	  if (self.callbacks[event_name][i] == callback)
+    		self.callbacks[event_name].splice(i, 1)
+    	}
+    }
   };
   return self;
 })();
