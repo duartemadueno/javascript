@@ -1,26 +1,34 @@
-var lit_object = {
-	length: litobject_length,
-	get: litobject_get
-};
-function litobject_length(){
-	var count = 0;
-	for (var prop in this) {
-		if (typeof (this[prop]) != 'function') {
-			count++;
+var lit_object = (function(){
+	var _p = {
+		'init': function(){
+			return self;
+		},
+		'litobject_length': function (){
+			var count = 0;
+			for (var prop in this) {
+				if (typeof (this[prop]) != 'function') {
+					count++;
+				}
+			}
+			return count;
+		},
+		'litobject_get': function (index) {
+			var count = 0;
+			for (var prop in this) {
+				if (typeof (this[prop]) != 'function') {
+					if (count == index) return this[prop];
+					count++;
+				}
+			}
+			return '';
 		}
-	}
-	return count;
-}
-function litobject_get(index) {
-	var count = 0;
-	for (var prop in this) {
-		if (typeof (this[prop]) != 'function') {
-			if (count == index) return this[prop];
-			count++;
-		}
-	}
-	return '';
-}
+	};
+	var self = {
+		'length': _p.litobject_length,
+		'get': _p.litobject_get
+	};
+	return _p.init;
+})();
 	
 //USAGE
 lit_object["x"] = {name: "y"};
